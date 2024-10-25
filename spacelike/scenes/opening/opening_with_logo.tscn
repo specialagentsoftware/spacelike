@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d7rx0bc56eqr"]
+
+[ext_resource type="PackedScene" path="res://scenes/opening/opening.tscn" id="1_yq6ye"]
+[ext_resource type="Texture2D" path="res://assets/images/logo_vertical_color_dark.png" id="2_vmcs0"]
+
+[node name="Opening" instance=ExtResource("1_yq6ye")]
+images = Array[Texture2D]([ExtResource("2_vmcs0")])
