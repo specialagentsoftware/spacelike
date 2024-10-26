@@ -15,16 +15,12 @@ run/main_scene="res://scenes/opening/opening_with_logo.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
-[autoload]
+[display]
 
-AppConfig="*res://addons/maaacks_game_template/base/scenes/autoloads/app_config.tscn"
-SceneLoader="*res://addons/maaacks_game_template/base/scenes/autoloads/scene_loader.tscn"
-ProjectMusicController="*res://addons/maaacks_game_template/base/scenes/autoloads/project_music_controller.tscn"
-ProjectUISoundController="*res://addons/maaacks_game_template/base/scenes/autoloads/project_ui_sound_controller.tscn"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/maaacks_game_template/plugin.cfg")
+window/size/viewport_width=640
+window/size/viewport_height=360
+window/size/window_width_override=1920
+window/size/window_height_override=1080
 
 [internationalization]
 
