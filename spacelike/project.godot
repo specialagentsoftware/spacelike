@@ -15,6 +15,10 @@ run/main_scene="res://scenes/title.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+SM="*res://scripts/SceneManager.gd"
+
 [display]
 
 window/size/viewport_width=640
@@ -27,10 +31,6 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/post_processing/plugin.cfg")
 
-[internationalization]
-
-locale/translations=PackedStringArray("res://addons/maaacks_game_template/base/translations/menus_translations.en.translation", "res://addons/maaacks_game_template/base/translations/menus_translations.fr.translation")
-
 [maaacks_game_template]
 
 disable_plugin_dialogues=true
@@ -39,6 +39,4 @@ copy_path="res://"
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
 2d/snap/snap_2d_transforms_to_pixel=true

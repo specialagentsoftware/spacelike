@@ -1,9 +1,274 @@
-[gd_scene format=3 uid="uid://orfdx1lseevb"]
+[gd_scene load_steps=11 format=3 uid="uid://orfdx1lseevb"]
 
-[node name="ShipSelect" type="Control"]
+[ext_resource type="Shader" path="res://scenes/space.gdshader" id="1_iy6kg"]
+[ext_resource type="FontFile" uid="uid://d36d102k3uc0p" path="res://assets/fonts/Cyberphont 3.0 A.ttf" id="1_jy46y"]
+[ext_resource type="Texture2D" uid="uid://bh52eoabi68uy" path="res://assets/star_texture.png" id="2_3dgup"]
+[ext_resource type="Texture2D" uid="uid://dcnfk6m7ytbu2" path="res://assets/images/Menu/16x16 Scalable Screen.png" id="4_vkiiv"]
+[ext_resource type="Texture2D" uid="uid://dhaokhhna2dq8" path="res://assets/images/UI interractables/scalable_button.png" id="5_i7e0o"]
+[ext_resource type="Texture2D" uid="uid://xklnstgidgls" path="res://assets/images/UI interractables/scalable_button_Pressed.png" id="6_5rnwl"]
+[ext_resource type="Texture2D" uid="uid://crdaeysr44wx1" path="res://assets/images/UI interractables/scalable_button_hover.png" id="7_easqw"]
+
+[sub_resource type="GDScript" id="GDScript_2p7r3"]
+script/source = "extends Node2D
+
+@export var star_count: int = 2000  # Number of stars to generate
+@export var space_size: Vector2 = Vector2(4000, 4000)  # The size of the space area
+@export var customize_screen: PackedScene
+
+func _ready():
+	randomize()  # Ensure randomness for star placement
+
+	# Generate random stars
+	for i in range(star_count):
+		var star = Sprite2D.new()
+		star.texture = preload(\"res://assets/star_texture.png\")  # Preload a simple star texture
+		star.position = Vector2(
+			randf() * space_size.x,  # Random x position within space size
+			randf() * space_size.y   # Random y position within space size
+		)
+		add_child(star)  # Add the star to the scene
+
+# Move the starfield slowly across the screen
+func _process(delta):
+	$Starfield.position.x += delta * 20
+	if $Starfield.position.x > get_viewport().size.x:
+		$Starfield.position.x = 0
+
+
+func _on_heavy_tank_button_pressed() -> void:
+	SM.go_to_customization()
+
+
+func _on_lght_scout_button_pressed() -> void:
+	SM.go_to_customization()
+
+
+func _on_balanced_fighter_button_pressed() -> void:
+	SM.go_to_customization()
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ba6kc"]
+shader = ExtResource("1_iy6kg")
+shader_parameter/twinkle_speed = 1.0
+shader_parameter/twinkle_intensity = 0.5
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lqprj"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+inherit_velocity_ratio = 0.07
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 10.75
+initial_velocity_max = 10.75
+radial_velocity_min = 32.26
+radial_velocity_max = 32.26
+gravity = Vector3(0, 0, 0)
+
+[node name="ShipSelectScreen" type="Node2D"]
+script = SubResource("GDScript_2p7r3")
+star_count = 500
+space_size = Vector2(1000, 1000)
+
+[node name="Starfield" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_ba6kc")
+position = Vector2(138, 102)
+scale = Vector2(2.16, 1.12)
+amount = 5000
+process_material = SubResource("ParticleProcessMaterial_lqprj")
+texture = ExtResource("2_3dgup")
+lifetime = 10.0
+speed_scale = 0.0
+randomness = 0.5
+fixed_fps = 0
+visibility_rect = Rect2(-100, -100, 350, 350)
+local_coords = true
+draw_order = 0
+trail_enabled = true
+
+[node name="ShipSelect" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="ShipSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -25.0
+offset_top = -15.0
+offset_right = 656.0
+offset_bottom = 377.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="ShipSelect"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 107.0
+offset_top = 11.0
+offset_right = 518.0
+offset_bottom = 63.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_jy46y")
+theme_override_font_sizes/font_size = 35
+text = "Select a ship Type"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NinePatchRect" type="NinePatchRect" parent="ShipSelect"]
+offset_left = 17.0
+offset_top = 62.0
+offset_right = 209.0
+offset_bottom = 345.0
+texture = ExtResource("4_vkiiv")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="ShipSelect"]
+offset_left = 230.0
+offset_top = 62.0
+offset_right = 422.0
+offset_bottom = 345.0
+texture = ExtResource("4_vkiiv")
+
+[node name="NinePatchRect3" type="NinePatchRect" parent="ShipSelect"]
+offset_left = 444.0
+offset_top = 62.0
+offset_right = 636.0
+offset_bottom = 345.0
+texture = ExtResource("4_vkiiv")
+
+[node name="LightScoutTitle" type="Label" parent="."]
+offset_left = 55.0
+offset_top = 98.0
+offset_right = 171.0
+offset_bottom = 121.0
+theme_override_fonts/font = ExtResource("1_jy46y")
+text = "Light Scout"
+
+[node name="LightScoutDescription" type="Label" parent="."]
+offset_left = 55.0
+offset_top = 134.0
+offset_right = 171.0
+offset_bottom = 164.0
+theme_override_fonts/font = ExtResource("1_jy46y")
+theme_override_font_sizes/font_size = 8
+text = "This is a short description for the light scout ship"
+autowrap_mode = 2
+
+[node name="HeavyTankDescription" type="Label" parent="."]
+offset_left = 482.0
+offset_top = 134.0
+offset_right = 598.0
+offset_bottom = 164.0
+theme_override_fonts/font = ExtResource("1_jy46y")
+theme_override_font_sizes/font_size = 8
+text = "This is a short description for the light scout ship"
+autowrap_mode = 2
+
+[node name="BalancedFighterDescription" type="Label" parent="."]
+offset_left = 272.0
+offset_top = 134.0
+offset_right = 388.0
+offset_bottom = 164.0
+theme_override_fonts/font = ExtResource("1_jy46y")
+theme_override_font_sizes/font_size = 8
+text = "This is a short description for the light scout ship"
+autowrap_mode = 2
+
+[node name="Balancedfightertitle" type="Label" parent="."]
+offset_left = 269.0
+offset_top = 90.0
+offset_right = 385.0
+offset_bottom = 125.0
+theme_override_fonts/font = ExtResource("1_jy46y")
+text = "Balanced Fighter"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="HeavyTankTitle" type="Label" parent="."]
+offset_left = 483.0
+offset_top = 90.0
+offset_right = 599.0
+offset_bottom = 125.0
+theme_override_fonts/font = ExtResource("1_jy46y")
+text = "Heavy Tank"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="LghtScoutButton" type="TextureButton" parent="."]
+offset_left = 91.0
+offset_top = 312.0
+offset_right = 148.0
+offset_bottom = 334.0
+texture_normal = ExtResource("5_i7e0o")
+texture_pressed = ExtResource("6_5rnwl")
+texture_hover = ExtResource("7_easqw")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="LghtScoutButton"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 56.0
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("1_jy46y")
+theme_override_font_sizes/font_size = 12
+text = "Select"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BalancedFighterButton" type="TextureButton" parent="."]
+offset_left = 307.0
+offset_top = 312.0
+offset_right = 364.0
+offset_bottom = 334.0
+texture_normal = ExtResource("5_i7e0o")
+texture_pressed = ExtResource("6_5rnwl")
+texture_hover = ExtResource("7_easqw")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BalancedFighterButton"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 56.0
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("1_jy46y")
+theme_override_font_sizes/font_size = 12
+text = "Select"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HeavyTankButton" type="TextureButton" parent="."]
+offset_left = 524.0
+offset_top = 312.0
+offset_right = 581.0
+offset_bottom = 334.0
+texture_normal = ExtResource("5_i7e0o")
+texture_pressed = ExtResource("6_5rnwl")
+texture_hover = ExtResource("7_easqw")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="HeavyTankButton"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 56.0
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("1_jy46y")
+theme_override_font_sizes/font_size = 12
+text = "Select"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="LghtScoutButton" to="." method="_on_lght_scout_button_pressed"]
+[connection signal="pressed" from="BalancedFighterButton" to="." method="_on_balanced_fighter_button_pressed"]
+[connection signal="pressed" from="HeavyTankButton" to="." method="_on_heavy_tank_button_pressed"]

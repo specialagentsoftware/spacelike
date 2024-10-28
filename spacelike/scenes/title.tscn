@@ -1,20 +1,106 @@
-[gd_scene load_steps=6 format=3 uid="uid://x5jx0lith6i4"]
+[gd_scene load_steps=11 format=3 uid="uid://x5jx0lith6i4"]
 
 [ext_resource type="FontFile" uid="uid://d36d102k3uc0p" path="res://assets/fonts/Cyberphont 3.0 A.ttf" id="1_nim2g"]
 [ext_resource type="Texture2D" uid="uid://7drj34iitypt" path="res://assets/images/Menu/popup_1.png" id="2_5xw7t"]
 [ext_resource type="Texture2D" uid="uid://dlm7frdoovqgb" path="res://assets/images/Menu/Selector_1.png" id="3_truar"]
 [ext_resource type="Texture2D" uid="uid://bjjudy73oba7g" path="res://assets/images/Menu/popup_2.png" id="4_lplej"]
 [ext_resource type="Texture2D" uid="uid://c4l8dnv7euh3k" path="res://assets/images/Menu/Selector_2.png" id="5_llasd"]
+[ext_resource type="Shader" path="res://scenes/space.gdshader" id="6_qnxw6"]
+[ext_resource type="Texture2D" uid="uid://bh52eoabi68uy" path="res://assets/star_texture.png" id="7_elc1v"]
 
-[node name="Title" type="Control"]
+[sub_resource type="GDScript" id="GDScript_poavs"]
+script/source = "extends Node2D
+
+@export var star_count: int = 2000  # Number of stars to generate
+@export var space_size: Vector2 = Vector2(4000, 4000)  # The size of the space area
+
+func _ready():
+	randomize()  # Ensure randomness for star placement
+
+	# Generate random stars
+	for i in range(star_count):
+		var star = Sprite2D.new()
+		star.texture = preload(\"res://assets/star_texture.png\")  # Preload a simple star texture
+		star.position = Vector2(
+			randf() * space_size.x,  # Random x position within space size
+			randf() * space_size.y   # Random y position within space size
+		)
+		add_child(star)  # Add the star to the scene
+
+# Move the starfield slowly across the screen
+func _process(delta):
+	$Starfield.position.x += delta * 20
+	if $Starfield.position.x > get_viewport().size.x:
+		$Starfield.position.x = 0
+
+
+func _on_start_pressed() -> void:
+	SM.go_to_select()
+
+
+func _on_exit_pressed() -> void:
+	pass # Replace with function body.
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qc5ci"]
+shader = ExtResource("6_qnxw6")
+shader_parameter/twinkle_speed = 1.0
+shader_parameter/twinkle_intensity = 0.5
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nyssg"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+inherit_velocity_ratio = 0.07
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_min = 10.75
+initial_velocity_max = 10.75
+radial_velocity_min = 32.26
+radial_velocity_max = 32.26
+gravity = Vector3(0, 0, 0)
+
+[node name="TitleScene" type="Node2D"]
+script = SubResource("GDScript_poavs")
+star_count = 500
+space_size = Vector2(1000, 1000)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -39.0
+offset_top = -26.0
+offset_right = 676.0
+offset_bottom = 420.0
+color = Color(0, 0, 0, 1)
+
+[node name="Starfield" type="GPUParticles2D" parent="."]
+material = SubResource("ShaderMaterial_qc5ci")
+position = Vector2(138, 102)
+scale = Vector2(2.16, 1.12)
+amount = 5000
+process_material = SubResource("ParticleProcessMaterial_nyssg")
+texture = ExtResource("7_elc1v")
+lifetime = 10.0
+speed_scale = 0.0
+randomness = 0.5
+fixed_fps = 0
+visibility_rect = Rect2(-100, -100, 350, 350)
+local_coords = true
+draw_order = 0
+trail_enabled = true
+
+[node name="Title" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 316.0
+offset_top = -44.0
+offset_right = 316.0
+offset_bottom = -44.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="Title"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -28,16 +114,15 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -71.0
-offset_top = -184.0
-offset_right = -11.0
-offset_bottom = -154.0
+offset_left = 248.0
+offset_top = 175.0
+offset_right = 308.0
+offset_bottom = 205.0
 grow_horizontal = 2
 grow_vertical = 0
 
@@ -48,9 +133,9 @@ texture_hover = ExtResource("3_truar")
 
 [node name="Label" type="Label" parent="VBoxContainer/Start"]
 layout_mode = 0
-offset_left = 48.0
+offset_left = 6.0
 offset_top = -4.0
-offset_right = 105.0
+offset_right = 63.0
 offset_bottom = 19.0
 theme_override_fonts/font = ExtResource("1_nim2g")
 theme_override_font_sizes/font_size = 15
@@ -65,12 +150,15 @@ texture_hover = ExtResource("5_llasd")
 
 [node name="Label2" type="Label" parent="VBoxContainer/Exit"]
 layout_mode = 0
-offset_left = 47.0
+offset_left = 5.0
 offset_top = -4.0
-offset_right = 88.0
+offset_right = 46.0
 offset_bottom = 19.0
 theme_override_fonts/font = ExtResource("1_nim2g")
 theme_override_font_sizes/font_size = 15
 text = "Exit"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="pressed" from="VBoxContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Exit" to="." method="_on_exit_pressed"]
