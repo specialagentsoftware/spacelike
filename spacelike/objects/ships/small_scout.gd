@@ -6,10 +6,10 @@ var turning_speed: float = 3.0   # Higher turning speed
 var drag: float = 0.05           # Light drag
 
 # Weapons, defense systems, and abilities
-var primary_weapon: PackedScene = preload("res://scripts/weapons/primary/laser_cannon.tscn")
-var secondary_weapon: PackedScene = preload("res://scripts/weapons/secondary/emp.tscn")
-var defense_system: PackedScene = preload("res://scripts/defensive_systems/shield.tscn")
-var special_ability: PackedScene = preload("res://scripts/special_abilities/cloak.tscn") 
+var primary_weapon: PackedScene = preload("res://objects/weapons/primary/laser_cannon.tscn")
+var secondary_weapon: PackedScene = preload("res://objects/weapons/secondary/emp.tscn")
+var defense_system: PackedScene = preload("res://objects/defensive_systems/shield.tscn")
+var special_ability: PackedScene = preload("res://objects/special_abilities/cloak.tscn") 
 
 # Physics values
 var velocity: Vector2 = Vector2.ZERO

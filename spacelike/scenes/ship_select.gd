@@ -3,8 +3,8 @@ extends Node2D
 @export var star_count: int = 2000  # Number of stars to generate
 @export var space_size: Vector2 = Vector2(4000, 4000)  # The size of the space area
 @export var customize_screen: PackedScene
-const HEAVY_TANK = preload("res://scripts/ships/heavy_tank.tscn")
-const SMALL_SCOUT = preload("res://scripts/ships/small_scout.tscn")
+const HEAVY_TANK = preload("res://objects/ships/heavy_tank.tscn")
+const SMALL_SCOUT = preload("res://objects/ships/small_scout.tscn")
 
 func _ready():
 	randomize()  # Ensure randomness for star placement
