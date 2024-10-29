@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://gkvmonrobadu"]
+
+[ext_resource type="Script" path="res://objects/weapons/primary/rail_gun.gd" id="1_jumcy"]
+
+[node name="RailGun" type="Node2D"]
+script = ExtResource("1_jumcy")

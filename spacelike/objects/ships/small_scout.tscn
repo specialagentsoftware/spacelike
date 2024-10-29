@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://4l8tj5dmv2v"]
+
+[ext_resource type="Script" path="res://objects/ships/small_scout.gd" id="1_yibwh"]
+[ext_resource type="Texture2D" uid="uid://baend3redljqb" path="res://icon.svg" id="2_qviwu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k04yl"]
+radius = 61.9839
+
+[node name="Small Scout" type="RigidBody2D"]
+script = ExtResource("1_yibwh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0.678063, 0.000350103, 0.679084, 1)
+rotation = 1.5708
+texture = ExtResource("2_qviwu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k04yl")

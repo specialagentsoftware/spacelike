@@ -1,15 +1,27 @@
-[gd_scene load_steps=8 format=3 uid="uid://k882aq76ulsc"]
+[gd_scene load_steps=16 format=3 uid="uid://k882aq76ulsc"]
 
 [ext_resource type="Script" path="res://scenes/ship_customization.gd" id="1_ilyhk"]
 [ext_resource type="Texture2D" uid="uid://dcnfk6m7ytbu2" path="res://assets/images/Menu/16x16 Scalable Screen.png" id="1_qtn7n"]
+[ext_resource type="PackedScene" uid="uid://dcnu3nub036k4" path="res://objects/weapons/primary/laser_cannon.tscn" id="2_1g44a"]
 [ext_resource type="FontFile" uid="uid://d36d102k3uc0p" path="res://assets/fonts/Cyberphont 3.0 A.ttf" id="2_i420a"]
+[ext_resource type="PackedScene" uid="uid://gkvmonrobadu" path="res://objects/weapons/primary/rail_gun.tscn" id="3_2ddyo"]
+[ext_resource type="PackedScene" uid="uid://b5823vj2kqawo" path="res://objects/weapons/secondary/emp.tscn" id="3_e4lvx"]
 [ext_resource type="Texture2D" uid="uid://c1o15s4mwrrll" path="res://assets/images/UI interractables/left.png" id="3_xegg0"]
+[ext_resource type="PackedScene" uid="uid://b3u7cret3rxju" path="res://objects/weapons/secondary/mines.tscn" id="5_vq1en"]
 [ext_resource type="Texture2D" uid="uid://dhaokhhna2dq8" path="res://assets/images/UI interractables/scalable_button.png" id="5_yy7u3"]
 [ext_resource type="Texture2D" uid="uid://xklnstgidgls" path="res://assets/images/UI interractables/scalable_button_Pressed.png" id="6_0oajb"]
+[ext_resource type="PackedScene" uid="uid://dd85gr8kf0en" path="res://objects/defensive_systems/shield.tscn" id="6_c0k2s"]
 [ext_resource type="Texture2D" uid="uid://crdaeysr44wx1" path="res://assets/images/UI interractables/scalable_button_hover.png" id="7_31ef5"]
+[ext_resource type="PackedScene" uid="uid://dcd05rrwd4sxm" path="res://objects/special_abilities/cloak.tscn" id="7_moc8r"]
+[ext_resource type="PackedScene" uid="uid://r5mmxrg8fypw" path="res://objects/special_abilities/overdrive.tscn" id="8_hy0sn"]
+[ext_resource type="PackedScene" uid="uid://dnhwhq0mbblhb" path="res://objects/special_abilities/teleport.tscn" id="9_7mk0s"]
 
 [node name="ShipCustomization" type="Node2D"]
 script = ExtResource("1_ilyhk")
+primary_weapon_types = [ExtResource("2_1g44a"), ExtResource("3_2ddyo")]
+secondary_weapon_types = [ExtResource("3_e4lvx"), ExtResource("5_vq1en")]
+defensive_systems_types = [ExtResource("6_c0k2s")]
+special_module_types = [ExtResource("7_moc8r"), ExtResource("8_hy0sn"), ExtResource("9_7mk0s")]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -233,9 +245,9 @@ texture_normal = ExtResource("3_xegg0")
 flip_h = true
 
 [node name="ConfirmButton" type="TextureButton" parent="."]
-offset_left = 252.0
+offset_left = 195.0
 offset_top = 248.0
-offset_right = 365.0
+offset_right = 308.0
 offset_bottom = 270.0
 texture_normal = ExtResource("5_yy7u3")
 texture_pressed = ExtResource("6_0oajb")
@@ -254,6 +266,28 @@ text = "Confirm"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="BackButton" type="TextureButton" parent="."]
+offset_left = 308.0
+offset_top = 248.0
+offset_right = 421.0
+offset_bottom = 270.0
+texture_normal = ExtResource("5_yy7u3")
+texture_pressed = ExtResource("6_0oajb")
+texture_hover = ExtResource("7_31ef5")
+stretch_mode = 0
+
+[node name="Label" type="Label" parent="BackButton"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 111.0
+offset_bottom = 20.0
+theme_override_fonts/font = ExtResource("2_i420a")
+theme_override_font_sizes/font_size = 12
+text = "Back"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="LeftWeaponTypeButton" to="." method="_on_left_weapon_type_button_pressed"]
 [connection signal="pressed" from="RightWeaponTypeButton" to="." method="_on_right_weapon_type_button_pressed"]
 [connection signal="pressed" from="LeftSecondaryWeaponTypeButton" to="." method="_on_left_secondary_weapon_type_button_pressed"]
@@ -263,3 +297,4 @@ vertical_alignment = 1
 [connection signal="pressed" from="LeftSpecialTypeButton" to="." method="_on_left_special_type_button_pressed"]
 [connection signal="pressed" from="RightSpecialTypeButton" to="." method="_on_right_special_type_button_pressed"]
 [connection signal="pressed" from="ConfirmButton" to="." method="_on_confirm_button_pressed"]
+[connection signal="pressed" from="BackButton" to="." method="_on_back_button_pressed"]

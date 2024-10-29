@@ -1,29 +1,12 @@
 extends Node2D
 
-@onready var primary_weapon_types = [
-	"Laser Turret", 
-	"Plasma Cannon",
-	"Rail Gun"]
+@export var primary_weapon_types = []
 
-@onready var secondary_weapon_types = [
-	"EMP Blast",
-	"Mine Deployment",
-	"Reflective Shield"
-]
+@export var secondary_weapon_types = []
 
-@onready var defensive_systems_types = [
-	"Energy Shields",
-	"Cloaking Device",
-	"Chaff",
-	"Armor Plating",
-]
+@export var defensive_systems_types = []
 
-@onready var special_module_types = [
-	"Teleportation",
-	"Overdrive",
-	"Tractor Beam",
-	
-]
+@export var special_module_types = []
 
 @onready var primary_weapon_options: Label = $PrimaryWeaponOptions
 @onready var left_weapon_type_button: TextureButton = $LeftWeaponTypeButton
@@ -37,7 +20,7 @@ extends Node2D
 @onready var special_module_options: Label = $SpecialModuleOptions
 @onready var left_special_type_button: TextureButton = $LeftSpecialTypeButton
 @onready var right_special_type_button: TextureButton = $RightSpecialTypeButton
-
+@onready var type_name: Label = $TypeName
 
 var primary_weapon_current_option_index = 0
 var secondary_weapon_current_option_index = 0
@@ -48,21 +31,26 @@ func _ready() -> void:
 	update_display()
 	
 func update_display():
-	primary_weapon_options.text = primary_weapon_types[primary_weapon_current_option_index]
+	type_name.text = SCM.get_ship_name()
+	var primary_weapon_instance = primary_weapon_types[primary_weapon_current_option_index].instantiate()
+	primary_weapon_options.text =primary_weapon_instance.name
 	left_weapon_type_button.disabled = primary_weapon_current_option_index == 0
 	right_weapon_type_button.disabled = primary_weapon_current_option_index == primary_weapon_types.size() - 1
 	
-	secondary_weapon_options.text = secondary_weapon_types[secondary_weapon_current_option_index]
+	var secondary_weapon_instance = secondary_weapon_types[secondary_weapon_current_option_index].instantiate()	
+	secondary_weapon_options.text = secondary_weapon_instance.name
 	left_secondary_weapon_type_button.disabled = secondary_weapon_current_option_index == 0
 	right_secondary_weapon_type_button.disabled = secondary_weapon_current_option_index == secondary_weapon_types.size() - 1
 
-	defensive_systems_options.text = defensive_systems_types[defensive_system_current_option_index]
+	var defensive_systems_instance = defensive_systems_types[defensive_system_current_option_index].instantiate()	
+	defensive_systems_options.text = defensive_systems_instance.name
 	left_defensive_type_button.disabled = defensive_system_current_option_index == 0
 	right_defensive_type_button.disabled = defensive_system_current_option_index == defensive_systems_types.size() - 1
 
-	special_module_options.text = special_module_types[special_module_current_option_index]
+	var special_module_instance = special_module_types[special_module_current_option_index].instantiate()	
+	special_module_options.text = special_module_instance.name
 	left_special_type_button.disabled = special_module_current_option_index == 0
-	left_special_type_button.disabled = special_module_current_option_index == special_module_types.size() - 1
+	right_special_type_button.disabled = special_module_current_option_index == special_module_types.size() - 1
 
 func _on_left_weapon_type_button_pressed() -> void:
 	if primary_weapon_current_option_index > 0:
@@ -112,4 +100,12 @@ func _on_right_special_type_button_pressed() -> void:
 		update_display()
 
 func _on_confirm_button_pressed() -> void:
-	pass # Replace with function body.
+	SCM.set_primary_weapon(primary_weapon_types[primary_weapon_current_option_index])
+	SCM.set_secondary_weapon(secondary_weapon_types[secondary_weapon_current_option_index])
+	SCM.set_special_ability(special_module_types[special_module_current_option_index])
+	SCM.set_defense_system(defensive_systems_types[defensive_system_current_option_index])
+	SM.gp_to_world()
+
+
+func _on_back_button_pressed() -> void:
+	SM.go_to_select()

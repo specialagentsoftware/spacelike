@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://r5mmxrg8fypw"]
+
+[ext_resource type="Script" path="res://objects/special_abilities/overdrive.gd" id="1_4uf7t"]
+
+[node name="Overdrive" type="Node"]
+script = ExtResource("1_4uf7t")

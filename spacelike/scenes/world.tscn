@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://cxeh1is46yisv"]
+
+[ext_resource type="Script" path="res://scenes/world.gd" id="1_5r0ew"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_5r0ew")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(318, 174)
+zoom = Vector2(0.5, 0.5)
+
+[node name="Startpoint" type="Marker2D" parent="."]
+position = Vector2(318, 174)

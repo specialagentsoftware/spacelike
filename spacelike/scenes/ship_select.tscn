@@ -1,5 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://orfdx1lseevb"]
 
+[ext_resource type="Script" path="res://scenes/ship_select.gd" id="1_4x2sr"]
 [ext_resource type="Shader" path="res://scenes/space.gdshader" id="1_iy6kg"]
 [ext_resource type="FontFile" uid="uid://d36d102k3uc0p" path="res://assets/fonts/Cyberphont 3.0 A.ttf" id="1_jy46y"]
 [ext_resource type="Texture2D" uid="uid://bh52eoabi68uy" path="res://assets/star_texture.png" id="2_3dgup"]
@@ -7,45 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dhaokhhna2dq8" path="res://assets/images/UI interractables/scalable_button.png" id="5_i7e0o"]
 [ext_resource type="Texture2D" uid="uid://xklnstgidgls" path="res://assets/images/UI interractables/scalable_button_Pressed.png" id="6_5rnwl"]
 [ext_resource type="Texture2D" uid="uid://crdaeysr44wx1" path="res://assets/images/UI interractables/scalable_button_hover.png" id="7_easqw"]
-
-[sub_resource type="GDScript" id="GDScript_2p7r3"]
-script/source = "extends Node2D
-
-@export var star_count: int = 2000  # Number of stars to generate
-@export var space_size: Vector2 = Vector2(4000, 4000)  # The size of the space area
-@export var customize_screen: PackedScene
-
-func _ready():
-	randomize()  # Ensure randomness for star placement
-
-	# Generate random stars
-	for i in range(star_count):
-		var star = Sprite2D.new()
-		star.texture = preload(\"res://assets/star_texture.png\")  # Preload a simple star texture
-		star.position = Vector2(
-			randf() * space_size.x,  # Random x position within space size
-			randf() * space_size.y   # Random y position within space size
-		)
-		add_child(star)  # Add the star to the scene
-
-# Move the starfield slowly across the screen
-func _process(delta):
-	$Starfield.position.x += delta * 20
-	if $Starfield.position.x > get_viewport().size.x:
-		$Starfield.position.x = 0
-
-
-func _on_heavy_tank_button_pressed() -> void:
-	SM.go_to_customization()
-
-
-func _on_lght_scout_button_pressed() -> void:
-	SM.go_to_customization()
-
-
-func _on_balanced_fighter_button_pressed() -> void:
-	SM.go_to_customization()
-"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ba6kc"]
 shader = ExtResource("1_iy6kg")
@@ -66,9 +28,7 @@ radial_velocity_max = 32.26
 gravity = Vector3(0, 0, 0)
 
 [node name="ShipSelectScreen" type="Node2D"]
-script = SubResource("GDScript_2p7r3")
-star_count = 500
-space_size = Vector2(1000, 1000)
+script = ExtResource("1_4x2sr")
 
 [node name="Starfield" type="GPUParticles2D" parent="."]
 material = SubResource("ShaderMaterial_ba6kc")
@@ -123,6 +83,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="NinePatchRect" type="NinePatchRect" parent="ShipSelect"]
+layout_mode = 0
 offset_left = 17.0
 offset_top = 62.0
 offset_right = 209.0
@@ -130,6 +91,7 @@ offset_bottom = 345.0
 texture = ExtResource("4_vkiiv")
 
 [node name="NinePatchRect2" type="NinePatchRect" parent="ShipSelect"]
+layout_mode = 0
 offset_left = 230.0
 offset_top = 62.0
 offset_right = 422.0
@@ -137,6 +99,7 @@ offset_bottom = 345.0
 texture = ExtResource("4_vkiiv")
 
 [node name="NinePatchRect3" type="NinePatchRect" parent="ShipSelect"]
+layout_mode = 0
 offset_left = 444.0
 offset_top = 62.0
 offset_right = 636.0

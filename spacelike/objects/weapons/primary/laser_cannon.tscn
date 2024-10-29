@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcnu3nub036k4"]
+
+[ext_resource type="Script" path="res://objects/weapons/primary/laser_cannon.gd" id="1_y8j1e"]
+
+[node name="LaserCannon" type="Node2D"]
+script = ExtResource("1_y8j1e")
+metadata/name = "Lasser Cannon"
