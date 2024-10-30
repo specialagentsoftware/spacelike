@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scenes/ship_select.gd" id="1_4x2sr"]
 [ext_resource type="Shader" path="res://scenes/space.gdshader" id="1_iy6kg"]
 [ext_resource type="FontFile" uid="uid://d36d102k3uc0p" path="res://assets/fonts/Cyberphont 3.0 A.ttf" id="1_jy46y"]
-[ext_resource type="Texture2D" uid="uid://bh52eoabi68uy" path="res://assets/star_texture.png" id="2_3dgup"]
+[ext_resource type="Texture2D" uid="uid://bh52eoabi68uy" path="res://assets/images/stars/star_texture.png" id="2_3dgup"]
 [ext_resource type="PackedScene" uid="uid://k882aq76ulsc" path="res://scenes/ship_customization.tscn" id="2_362hd"]
 [ext_resource type="Texture2D" uid="uid://dcnfk6m7ytbu2" path="res://assets/images/Menu/16x16 Scalable Screen.png" id="4_vkiiv"]
 [ext_resource type="Texture2D" uid="uid://dhaokhhna2dq8" path="res://assets/images/UI interractables/scalable_button.png" id="5_i7e0o"]

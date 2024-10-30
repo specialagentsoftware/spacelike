@@ -1,17 +1,27 @@
-[gd_scene load_steps=4 format=3 uid="uid://daubinv4gr7re"]
+[gd_scene load_steps=6 format=3 uid="uid://daubinv4gr7re"]
 
 [ext_resource type="Script" path="res://objects/ships/heavy_tank.gd" id="1_5amxh"]
-[ext_resource type="Texture2D" uid="uid://baend3redljqb" path="res://icon.svg" id="2_jiymq"]
+[ext_resource type="Shader" path="res://objects/ships/sprite_shader.gdshader" id="2_6ni7x"]
+[ext_resource type="Texture2D" uid="uid://d0e0imci7a3rg" path="res://assets/images/Ships/heavy_tank.png" id="2_g0vqy"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_c6jm8"]
-radius = 61.9839
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8rwi7"]
+shader = ExtResource("2_6ni7x")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_deajg"]
+radius = 29.0
+height = 80.0
 
 [node name="Heavy Tank" type="RigidBody2D"]
 script = ExtResource("1_5amxh")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." groups=["player"]]
+texture_filter = 2
+material = SubResource("ShaderMaterial_8rwi7")
+position = Vector2(-1.13687e-12, -1)
 rotation = 1.5708
-texture = ExtResource("2_jiymq")
+scale = Vector2(1.29463, 1.34251)
+texture = ExtResource("2_g0vqy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_c6jm8")
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_deajg")

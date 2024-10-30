@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://di14hfg5k4j03"]
+
+[ext_resource type="Shader" path="res://objects/ships/sprite_shader.gdshader" id="1_n028h"]
+[ext_resource type="Script" path="res://objects/ships/medium_cruiser.gd" id="2_ndam6"]
+[ext_resource type="Texture2D" uid="uid://8mfo508uqu41" path="res://assets/images/Ships/starship_0004.png" id="3_ldr4v"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_admce"]
+shader = ExtResource("1_n028h")
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1r123"]
+radius = 8.01472
+height = 40.0579
+
+[node name="Medium Cruiser" type="RigidBody2D" groups=["player"]]
+texture_filter = 2
+material = SubResource("ShaderMaterial_admce")
+script = ExtResource("2_ndam6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("3_ldr4v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.55509
+shape = SubResource("CapsuleShape2D_1r123")

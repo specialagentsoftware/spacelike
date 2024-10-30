@@ -1,13 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxeh1is46yisv"]
+[gd_scene load_steps=4 format=3 uid="uid://cxeh1is46yisv"]
 
-[ext_resource type="Script" path="res://scenes/world.gd" id="1_5r0ew"]
+[ext_resource type="Script" path="res://scenes/main_camera.gd" id="2_6otxc"]
+[ext_resource type="PackedScene" uid="uid://b31ew8ddecwuo" path="res://scenes/space_sector.tscn" id="2_i8lqq"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kl08y"]
+viewport_path = NodePath("CanvasLayer/Viewport")
 
 [node name="World" type="Node2D"]
-script = ExtResource("1_5r0ew")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(318, 174)
-zoom = Vector2(0.5, 0.5)
+[node name="Space" parent="." instance=ExtResource("2_i8lqq")]
 
-[node name="Startpoint" type="Marker2D" parent="."]
+[node name="Startpoint" type="Marker2D" parent="Space"]
 position = Vector2(318, 174)
+
+[node name="Camera2D" type="Camera2D" parent="Space"]
+position = Vector2(318, 174)
+limit_smoothed = true
+position_smoothing_enabled = true
+rotation_smoothing_enabled = true
+script = ExtResource("2_6otxc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 4
+
+[node name="Viewport" type="SubViewport" parent="CanvasLayer"]
+size = Vector2i(128, 128)
+render_target_clear_mode = 2
+render_target_update_mode = 4
+
+[node name="MinimapCamera" type="Camera2D" parent="CanvasLayer/Viewport"]
+zoom = Vector2(0.25, 0.25)
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = 494.0
+offset_top = 212.0
+offset_right = 622.0
+offset_bottom = 340.0
+texture = SubResource("ViewportTexture_kl08y")

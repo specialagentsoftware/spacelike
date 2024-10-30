@@ -1,0 +1,44 @@
+[gd_scene load_steps=30 format=3 uid="uid://b31ew8ddecwuo"]
+
+[ext_resource type="Script" path="res://scenes/space_sector.gd" id="1_0jnb2"]
+[ext_resource type="Texture2D" uid="uid://bh52eoabi68uy" path="res://assets/images/stars/star_texture.png" id="2_4mwqi"]
+[ext_resource type="Texture2D" uid="uid://ddya63qu1twn7" path="res://assets/images/stars/star_texture_1.png" id="3_2qu23"]
+[ext_resource type="Texture2D" uid="uid://dcgy0yx6n6shx" path="res://assets/images/asteroids/A1__00000.png" id="3_u860q"]
+[ext_resource type="Texture2D" uid="uid://bfl0nfwq7k5s3" path="res://assets/images/asteroids/A1__00001.png" id="4_6oxxu"]
+[ext_resource type="Texture2D" uid="uid://bcj0o81acqcav" path="res://assets/images/planets/Baren.png" id="4_614qf"]
+[ext_resource type="Texture2D" uid="uid://udvmo3nsord4" path="res://assets/images/stars/star_texture_2.png" id="4_ufmso"]
+[ext_resource type="Texture2D" uid="uid://dv2r2gemqgohb" path="res://assets/images/planets/Black_hole.png" id="5_4aya2"]
+[ext_resource type="Texture2D" uid="uid://7v21eo8ye6ag" path="res://assets/images/asteroids/A1__00002.png" id="5_tylh4"]
+[ext_resource type="Texture2D" uid="uid://ytlwhhfuyswt" path="res://assets/images/planets/Ice.png" id="6_3c25c"]
+[ext_resource type="Texture2D" uid="uid://bjtf11xuo5g2s" path="res://assets/images/asteroids/A1__00003.png" id="6_7m1ba"]
+[ext_resource type="Texture2D" uid="uid://b6bu606hvufbl" path="res://assets/images/asteroids/A1__00004.png" id="7_8jxkf"]
+[ext_resource type="Texture2D" uid="uid://ueecwqy0io3r" path="res://assets/images/planets/Lava.png" id="7_uksgx"]
+[ext_resource type="Texture2D" uid="uid://dsmnmph7pichf" path="res://assets/images/asteroids/A1__00005.png" id="8_2kpcb"]
+[ext_resource type="Texture2D" uid="uid://bw7o3gjpc4228" path="res://assets/images/planets/Terran.png" id="8_dl5uw"]
+[ext_resource type="Texture2D" uid="uid://dn8i4clauu4tb" path="res://assets/images/asteroids/A1__00006.png" id="9_xxejl"]
+[ext_resource type="Texture2D" uid="uid://bsgmy7vec1n1o" path="res://assets/images/asteroids/A1__00007.png" id="10_kbaef"]
+[ext_resource type="Texture2D" uid="uid://il47pvc7qv2l" path="res://assets/images/asteroids/A1__00008.png" id="11_dcg8o"]
+[ext_resource type="Texture2D" uid="uid://bnwrpuiofddba" path="res://assets/images/asteroids/A1__00009.png" id="12_72yas"]
+[ext_resource type="Texture2D" uid="uid://c6l1m48trwo5q" path="res://assets/images/asteroids/A1__00010.png" id="13_x5wt0"]
+[ext_resource type="Texture2D" uid="uid://bbqimcgp1eyci" path="res://assets/images/asteroids/A1__00011.png" id="14_g2s5y"]
+[ext_resource type="Texture2D" uid="uid://cxevmtj6dopp" path="res://assets/images/asteroids/A2__00010.png" id="15_8cc7v"]
+[ext_resource type="Texture2D" uid="uid://btngyff3h7qrv" path="res://assets/images/asteroids/A3__00001.png" id="16_bjugb"]
+[ext_resource type="Texture2D" uid="uid://x0xleui57ccw" path="res://assets/images/asteroids/A3__00006.png" id="17_eghsv"]
+[ext_resource type="Texture2D" uid="uid://crp6btajhkqqf" path="res://assets/images/asteroids/A3__00011.png" id="18_hkan7"]
+[ext_resource type="Texture2D" uid="uid://k6k7vki7igmg" path="res://assets/images/asteroids/A4__00000.png" id="19_8y3a7"]
+[ext_resource type="Texture2D" uid="uid://dxrcmlw5uswe3" path="res://assets/images/asteroids/A4__00002.png" id="20_kjdul"]
+[ext_resource type="Texture2D" uid="uid://b6g1niqego5d6" path="res://assets/images/asteroids/A6__00002.png" id="21_ix4fq"]
+[ext_resource type="Texture2D" uid="uid://b4x38yeitb8u7" path="res://assets/images/asteroids/A8__00001.png" id="22_0ns16"]
+
+[node name="Space" type="Node2D"]
+script = ExtResource("1_0jnb2")
+star_sprites = [ExtResource("2_4mwqi"), ExtResource("3_2qu23"), ExtResource("4_ufmso")]
+asteroid_sprites = [ExtResource("3_u860q"), ExtResource("4_6oxxu"), ExtResource("5_tylh4"), ExtResource("6_7m1ba"), ExtResource("7_8jxkf"), ExtResource("8_2kpcb"), ExtResource("9_xxejl"), ExtResource("10_kbaef"), ExtResource("11_dcg8o"), ExtResource("12_72yas"), ExtResource("13_x5wt0"), ExtResource("14_g2s5y"), ExtResource("15_8cc7v"), ExtResource("16_bjugb"), ExtResource("17_eghsv"), ExtResource("18_hkan7"), ExtResource("19_8y3a7"), ExtResource("20_kjdul"), ExtResource("21_ix4fq"), ExtResource("22_0ns16")]
+planet_sprites = [ExtResource("4_614qf"), ExtResource("5_4aya2"), ExtResource("6_3c25c"), ExtResource("7_uksgx"), ExtResource("8_dl5uw")]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -3714.0
+offset_top = -3187.0
+offset_right = 3519.0
+offset_bottom = 3253.0
+color = Color(0, 0, 0, 1)

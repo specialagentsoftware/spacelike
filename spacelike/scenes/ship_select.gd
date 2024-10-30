@@ -5,6 +5,7 @@ extends Node2D
 @export var customize_screen: PackedScene
 const HEAVY_TANK = preload("res://objects/ships/heavy_tank.tscn")
 const SMALL_SCOUT = preload("res://objects/ships/small_scout.tscn")
+const MEDIUM_CRUISER = preload("res://objects/ships/medium_cruiser.tscn")
 
 func _ready():
 	randomize()  # Ensure randomness for star placement
@@ -12,7 +13,7 @@ func _ready():
 	# Generate random stars
 	for i in range(star_count):
 		var star = Sprite2D.new()
-		star.texture = preload("res://assets/star_texture.png")  # Preload a simple star texture
+		star.texture = preload("res://assets/images/stars/star_texture.png")  # Preload a simple star texture
 		star.position = Vector2(
 			randf() * space_size.x,  # Random x position within space size
 			randf() * space_size.y   # Random y position within space size
@@ -37,4 +38,5 @@ func _on_lght_scout_button_pressed() -> void:
 
 
 func _on_balanced_fighter_button_pressed() -> void:
+	SCM.set_ship(MEDIUM_CRUISER)
 	SM.go_to_customization()

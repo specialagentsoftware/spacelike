@@ -1,9 +1,9 @@
 extends RigidBody2D
 
 # Ship stats
-var acceleration: float = 150.0  # Faster acceleration
-var turning_speed: float = 3.0   # Higher turning speed
-var drag: float = 0.05           # Light drag
+var acceleration: float = 170.0  # Faster acceleration
+var turning_speed: float = 3.5   # Higher turning speed
+var drag: float = 0.08          # Light drag
 
 # Weapons, defense systems, and abilities
 var primary_weapon: PackedScene = preload("res://objects/weapons/primary/laser_cannon.tscn")
@@ -20,7 +20,7 @@ var can_fire_secondary: bool = true
 var ability_active: bool = false
 
 func _ready():
-	print("Light Ship ready!")
+	print("Medium Ship ready!")
 
 # Main physics update function
 func _physics_process(delta):

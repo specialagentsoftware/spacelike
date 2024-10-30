@@ -32,6 +32,10 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/post_processing/plugin.cfg")
 
+[global_group]
+
+player=""
+
 [input]
 
 turn_left={
@@ -80,4 +84,5 @@ copy_path="res://"
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+textures/lossless_compression/force_png=true
 2d/snap/snap_2d_transforms_to_pixel=true

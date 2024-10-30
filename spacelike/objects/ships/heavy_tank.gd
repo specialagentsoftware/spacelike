@@ -1,8 +1,8 @@
 extends RigidBody2D
 
 # Ship stats
-var acceleration: float = 80.0    # Slower acceleration
-var turning_speed: float = 1.5    # Lower turning speed
+var acceleration: float = 60.0    # Slower acceleration
+var turning_speed: float = 0.9    # Lower turning speed
 var drag: float = 0.02            # Heavier drag (less)
 
 # Weapons, defense systems, and abilities

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bh52eoabi68uy"
-path="res://.godot/imported/star_texture.png-e5e2ff882712c604d902b51c03e006c6.ctex"
+uid="uid://2osk4cjihuod"
+path="res://.godot/imported/A2__00012.png-4eab8bbf27f2332bdecbd13144cb5f32.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/star_texture.png"
-dest_files=["res://.godot/imported/star_texture.png-e5e2ff882712c604d902b51c03e006c6.ctex"]
+source_file="res://assets/images/asteroids/A2__00012.png"
+dest_files=["res://.godot/imported/A2__00012.png-4eab8bbf27f2332bdecbd13144cb5f32.ctex"]
 
 [params]
 

@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bjjudy73oba7g" path="res://assets/images/Menu/popup_2.png" id="4_lplej"]
 [ext_resource type="Texture2D" uid="uid://c4l8dnv7euh3k" path="res://assets/images/Menu/Selector_2.png" id="5_llasd"]
 [ext_resource type="Shader" path="res://scenes/space.gdshader" id="6_qnxw6"]
-[ext_resource type="Texture2D" uid="uid://bh52eoabi68uy" path="res://assets/star_texture.png" id="7_elc1v"]
+[ext_resource type="Texture2D" uid="uid://bh52eoabi68uy" path="res://assets/images/stars/star_texture.png" id="7_elc1v"]
 
 [sub_resource type="GDScript" id="GDScript_poavs"]
 script/source = "extends Node2D
@@ -20,7 +20,7 @@ func _ready():
 	# Generate random stars
 	for i in range(star_count):
 		var star = Sprite2D.new()
-		star.texture = preload(\"res://assets/star_texture.png\")  # Preload a simple star texture
+		star.texture = preload(\"res://assets/images/stars/star_texture.png\")  # Preload a simple star texture
 		star.position = Vector2(
 			randf() * space_size.x,  # Random x position within space size
 			randf() * space_size.y   # Random y position within space size
