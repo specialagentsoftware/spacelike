@@ -1,16 +1,16 @@
 extends Node2D
 
+@onready var main_viewport_world: World2D = get_viewport().world_2d
+@onready var minimap_viewport: Viewport = $CanvasLayer/SubViewportContainer/SubViewport  # Adjust this path to where your minimap Viewport is
+
 # Settings for the sector
-var sector_size: int = 4096  # Size of the entire space sector
-var chunk_size: int = 1024   # Size of each chunk
+var sector_size: int = 8192  # Size of the entire space sector
+var chunk_size: int = 2048   # Size of each chunk
 var player: Node2D           # Reference to the player
 var loaded_chunks = {}       # Dictionary to keep track of loaded chunks
 var chunk_pool = []          # Pool of reusable chunk nodes
 
 @onready var startpoint: Marker2D = $Startpoint
-@onready var minimap_texture_rect: TextureRect = $"../CanvasLayer/TextureRect"  # Minimap display
-@onready var minimap_camera: Camera2D = $"../CanvasLayer/Viewport/MinimapCamera"  # Minimap camera
-@onready var viewport: Viewport = $"../CanvasLayer/Viewport"  # Minimap viewport
 
 @export var star_sprites = []
 @export var asteroid_sprites = []
@@ -20,33 +20,21 @@ var chunk_pool = []          # Pool of reusable chunk nodes
 signal chunk_loaded(chunk_position)
 
 func _ready():
+	minimap_viewport.world_2d = main_viewport_world
 	# Assuming SCM.selected_ship is your player's node
 	player = SCM.selected_ship
 	add_child(player)
 	player.position = startpoint.position
 	player.z_index = 3  # Make sure player is in front of everything
-	
+
 	# Initialize the chunk pool
 	_initialize_chunk_pool()
 
-	# Set minimap camera to follow player
-	minimap_camera.zoom = Vector2(.25, .25)  # Zoom out the minimap to show the sector
-	minimap_camera.position = player.position  # Start the minimap camera at the player's position
-	
-	# Set the TextureRect's texture to the Viewport
-	minimap_texture_rect.texture = viewport.get_texture()
-
-	# Defer the update_chunks call to ensure everything is properly initialized
 	call_deferred("_update_chunks")
 
 func _process(delta):
 	_update_chunks()
-	_update_minimap()
-
-# Updates the minimap's camera to follow the player's position
-func _update_minimap():
-	minimap_camera.position = player.global_position
-
+	
 # Initializes a pool of reusable chunks (for performance)
 func _initialize_chunk_pool():
 	for i in range(10):  # Create an arbitrary number of chunk nodes to reuse
@@ -110,7 +98,7 @@ func _populate_chunk(chunk: Node2D, chunk_position: Vector2):
 		planet.z_index = 2
 		chunk.add_child(planet)
 
-# Function to create a new chunk
+# Function to create a new chunk (or load a chunk scene)
 func _create_chunk() -> Node2D:
 	return Node2D.new()
 
@@ -120,13 +108,13 @@ func _create_star() -> Sprite2D:
 	star.texture = star_sprites[randi() % star_sprites.size()]
 	return star
 
-# Function for generating asteroids
+# Example function for generating asteroids
 func _create_asteroid(rng: RandomNumberGenerator) -> Sprite2D:
 	var asteroid = Sprite2D.new()
 	asteroid.texture = asteroid_sprites[rng.randi_range(0, asteroid_sprites.size() - 1)]
 	return asteroid
 
-# Function for generating planets
+# Example function for generating planets
 func _create_planet(rng: RandomNumberGenerator) -> Sprite2D:
 	var planet = Sprite2D.new()
 	planet.texture = planet_sprites[rng.randi_range(0, planet_sprites.size() - 1)]

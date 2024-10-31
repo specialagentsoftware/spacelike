@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://dw2mdl25364os"]
+
+[ext_resource type="Script" path="res://scenes/minimap.gd" id="1_ejbb8"]
+
+[node name="MiniMap" type="CanvasLayer"]
+script = ExtResource("1_ejbb8")
+
+[node name="MiniMap" type="ColorRect" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -111.0
+offset_right = -14.0
+offset_bottom = -11.0
+grow_horizontal = 0
+grow_vertical = 0
+color = Color(0.649417, 0.161398, 0.409894, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MiniMap"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="MiniMap/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(100, 100)
+render_target_update_mode = 4
+
+[node name="Camera2D" type="Camera2D" parent="MiniMap/SubViewportContainer/SubViewport"]
+zoom = Vector2(0.25, 0.25)

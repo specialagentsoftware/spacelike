@@ -4,7 +4,7 @@ extends RigidBody2D
 var acceleration: float = 60.0    # Slower acceleration
 var turning_speed: float = 0.9    # Lower turning speed
 var drag: float = 0.02            # Heavier drag (less)
-
+var max_speed: float = 100.0
 # Weapons, defense systems, and abilities
 var primary_weapon: PackedScene = preload("res://objects/weapons/primary/laser_cannon.tscn")  # Example weapon
 var secondary_weapon: PackedScene = preload("res://objects/weapons/secondary/emp.tscn")
@@ -26,7 +26,8 @@ func _ready():
 func _physics_process(delta):
 	handle_movement(delta)
 	apply_drag(delta)
-
+	# Cap velocity to the max speed
+	limit_speed()
 	handle_weapons()
 	handle_defensive_systems()
 	handle_special_abilities()
@@ -55,6 +56,10 @@ func rotate_left(delta):
 func rotate_right(delta):
 	rotation += turning_speed * delta
 
+func limit_speed():
+	if velocity.length() > max_speed:
+		velocity = velocity.normalized() * max_speed
+		
 # Apply drag to slow down ship gradually
 func apply_drag(delta):
 	velocity = velocity.lerp(Vector2.ZERO, drag * delta)

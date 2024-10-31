@@ -5,9 +5,10 @@ var follow_speed: float = 13.0  # Speed of the camera catching up
 var min_distance: float = 0.0  # Minimum distance before the camera starts moving
 
 func _ready():
-	# Try to find the player initially, and connect the signal for when nodes are added
+	var main_camera = get_tree().get_first_node_in_group("main_canera")
 	find_player()
 	get_tree().connect("node_added", Callable(self, "_on_node_added"))
+	self.make_current()
 
 func _process(delta):
 	if current_target:
