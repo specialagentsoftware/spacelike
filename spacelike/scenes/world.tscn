@@ -1,8 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cxeh1is46yisv"]
+[gd_scene load_steps=6 format=3 uid="uid://cxeh1is46yisv"]
 
 [ext_resource type="Script" path="res://scenes/main_camera.gd" id="2_6otxc"]
 [ext_resource type="PackedScene" uid="uid://b31ew8ddecwuo" path="res://scenes/space_sector.tscn" id="2_i8lqq"]
 [ext_resource type="Script" path="res://scenes/camera_mini.gd" id="3_xtmw4"]
+[ext_resource type="Shader" path="res://scenes/radar.gdshader" id="4_hvop4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6o0u5"]
+shader = ExtResource("4_hvop4")
+shader_parameter/radar_color = Vector4(0, 2, 0, 0)
 
 [node name="World" type="Node2D"]
 
@@ -22,7 +27,8 @@ script = ExtResource("2_6otxc")
 layer = 8
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Space/CanvasLayer"]
-z_index = 8
+self_modulate = Color(0.945106, 0.781191, 1, 1)
+z_index = 10
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
@@ -34,6 +40,8 @@ offset_right = -13.0
 offset_bottom = -12.0
 grow_horizontal = 0
 grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="SubViewport" type="SubViewport" parent="Space/CanvasLayer/SubViewportContainer"]
 handle_input_locally = false
@@ -45,9 +53,18 @@ z_index = 8
 zoom = Vector2(0.1, 0.1)
 script = ExtResource("3_xtmw4")
 
-[node name="ColorRect" type="ColorRect" parent="Space/CanvasLayer"]
+[node name="Shader" type="ColorRect" parent="Space/CanvasLayer"]
+z_index = 10
+material = SubResource("ShaderMaterial_6o0u5")
 offset_left = 525.0
 offset_top = 246.0
 offset_right = 629.0
 offset_bottom = 350.0
 color = Color(0.352738, 0.529808, 0.319937, 1)
+
+[node name="Border" type="ColorRect" parent="Space/CanvasLayer"]
+offset_left = 524.0
+offset_top = 246.0
+offset_right = 630.0
+offset_bottom = 350.0
+color = Color(0, 0.316351, 0.0136831, 1)
