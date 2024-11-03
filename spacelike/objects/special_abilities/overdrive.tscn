@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://objects/special_abilities/overdrive.gd" id="1_4uf7t"]
 
-[node name="Overdrive" type="Node"]
+[node name="Overdrive" type="Node2D"]
 script = ExtResource("1_4uf7t")

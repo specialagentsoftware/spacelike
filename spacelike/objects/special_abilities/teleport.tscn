@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://objects/special_abilities/teleport.gd" id="1_s266x"]
 
-[node name="Teleport" type="Node"]
+[node name="Teleport" type="Node2D"]
 script = ExtResource("1_s266x")

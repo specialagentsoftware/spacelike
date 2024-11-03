@@ -4,8 +4,13 @@ extends Node2D
 @onready var minimap_viewport: Viewport = $CanvasLayer/SubViewportContainer/SubViewport  # Adjust this path to where your minimap Viewport is
 
 # Settings for the sector
-var sector_size: int = 8192  # Size of the entire space sector
-var chunk_size: int = 2048   # Size of each chunk
+@export var sector_size: int = 16384  # Size of the entire space sector
+@export var chunk_size: int = 4096   # Size of each chunk
+@export var min_stars: int = 50
+@export var max_stars: int = 120
+@export var planet_percentage: float = 0.3
+@export var min_asteroids: int = 5
+@export var max_asteroids: int = 10
 var player: Node2D           # Reference to the player
 var loaded_chunks = {}       # Dictionary to keep track of loaded chunks
 var chunk_pool = []          # Pool of reusable chunk nodes
@@ -74,7 +79,7 @@ func _populate_chunk(chunk: Node2D, chunk_position: Vector2):
 	rng.seed = int(chunk_position.x * chunk_position.y)
 
 	# Stars
-	for i in range(rng.randi_range(50, 120)):
+	for i in range(rng.randi_range(min_stars ,max_stars)):
 		var star = _create_star()
 		star.position = Vector2(rng.randf_range(0, chunk_size), rng.randf_range(0, chunk_size))
 		star.scale = Vector2(rng.randf_range(0.5, 1.5), rng.randf_range(0.5, 1.5))
@@ -83,7 +88,7 @@ func _populate_chunk(chunk: Node2D, chunk_position: Vector2):
 		chunk.add_child(star)
 
 	# Asteroids
-	for i in range(rng.randi_range(5, 10)):
+	for i in range(rng.randi_range(min_asteroids, max_asteroids)):
 		var asteroid = _create_asteroid(rng)
 		asteroid.position = Vector2(rng.randf_range(0, chunk_size), rng.randf_range(0, chunk_size))
 		asteroid.scale = Vector2(rng.randf_range(0.4, 1.2), rng.randf_range(0.4, 1.2))
@@ -91,7 +96,7 @@ func _populate_chunk(chunk: Node2D, chunk_position: Vector2):
 		chunk.add_child(asteroid)
 
 	# Planets
-	if rng.randf() < 0.3:
+	if rng.randf() < planet_percentage:
 		var planet = _create_planet(rng)
 		planet.position = Vector2(rng.randf_range(0, chunk_size), rng.randf_range(0, chunk_size))
 		planet.scale = Vector2(rng.randf_range(1.0, 1.5), rng.randf_range(1.0, 1.5))
