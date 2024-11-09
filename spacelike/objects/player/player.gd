@@ -141,6 +141,7 @@ func activate_special_ability():
 	get_parent().add_child(ability_instance)
 	
 	ability_active = true
+	ability_instance.activate()
 	await _set_cooldown(5, "ability_ready")  # Ability active for 5 seconds
 	ability_active = false
 

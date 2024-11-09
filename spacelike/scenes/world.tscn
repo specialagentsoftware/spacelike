@@ -14,7 +14,7 @@ shader_parameter/radar_color = Vector4(0, 2, 0, 0)
 [node name="Space" parent="." instance=ExtResource("2_i8lqq")]
 min_stars = 1500
 max_stars = 3000
-planet_percentage = 0.45
+planet_percentage = 0.75
 min_asteroids = 120
 max_asteroids = 300
 

@@ -11,7 +11,7 @@ void fragment() {
 
     // Sample the texture
     vec4 tex_color = texture(TEXTURE, uv);
-    
+
     // Output the final color with adjusted opacity
     COLOR = vec4(tex_color.rgb, tex_color.a * fog_opacity);
 }
